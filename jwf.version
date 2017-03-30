@@ -1,0 +1,13 @@
+# -*- mode: Makefile; -*-
+
+# Build Version Information
+
+KERNEL_BUILDVERSION_MAJOR=1
+KERNEL_BUILDVERSION_MINOR=2
+KERNEL_BUILDVERSION_PATCH=0
+KERNEL_BUILDVERSION_BUILDNR=102
+KERNEL_BUILDVERSION_DATE=20170330
+KERNEL_BUILDVERSION_STATUS=Developer_Build
+KERNEL_BUILDVERSION_NUGET=1.2.100062
+
+#-------------------------------- End of File -----------------------------------
