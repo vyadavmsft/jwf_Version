@@ -69,7 +69,7 @@ if [ ! -w $VERSION_FILE ]; then
     echo "File $VERSION_FILE is not writeable" 1>& 2
     exit 1
 fi
-fi
+
 
 # Set release build
 if [ $P_RELEASE -ne 0 ]; then
