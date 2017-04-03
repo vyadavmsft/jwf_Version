@@ -70,6 +70,36 @@ if [ ! -w $VERSION_FILE ]; then
     exit 1
 fi
 
+# Set default behavior
+[ $P_RELEASE -eq 0 ] && P_INCREMENT=1
+
+# Increment build number
+if [ $P_INCREMENT -ne 0 ]; then
+    VERSION_OLD=`grep '^[A-Z]*_BUILDVERSION_BUILDNR' $VERSION_FILE | cut -d= -f2`
+    DATE_OLD=`grep '^[A-Z]*_BUILDVERSION_DATE' $VERSION_FILE | cut -d= -f2`
+
+    VERSION_NEW=$(( $VERSION_OLD + 1 ))
+    DATE_NEW=`date +%Y%m%d`
+
+    if [ $DATE_NEW -eq $DATE_OLD ]; then
+        if [ $VERBOSE -ne 0 ]; then
+            echo "Date has not changed.  Incrementing build number only."
+            echo "Updated version number, Was: $VERSION_OLD, Now $VERSION_NEW"
+        fi
+    else
+        if [ $VERBOSE -ne 0 ]; then
+            echo "Updated release date,   Was: $DATE_OLD, Now $DATE_NEW"
+            echo "Date has changed.  Resetting build number to 1"
+        fi
+        VERSION_NEW=1
+    fi
+
+    perl -i -pe "s/(^[A-Z]*_BUILDVERSION_BUILDNR)=.*/\1=$VERSION_NEW/" $VERSION_FILE
+    perl -i -pe "s/(^[A-Z]*_BUILDVERSION_DATE)=.*/\1=$DATE_NEW/" $VERSION_FILE
+fi
+
+export JWF_BUILDVERSION_BUILDNR=$DATE_NEW"__"$VERSION_NEW
+echo "New version = $JWF_BUILDVERSION_BUILDNR"
 
 # Set release build
 if [ $P_RELEASE -ne 0 ]; then
