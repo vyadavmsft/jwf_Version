@@ -1,0 +1,3 @@
+[submodule "linux-netvsc"]
+	path = linux-netvsc
+	url = jfawcett@linuxonhyperv.com:/home/sthemmin/git/linux-netvsc.git
