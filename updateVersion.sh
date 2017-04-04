@@ -91,7 +91,8 @@ if [ $P_INCREMENT -ne 0 ]; then
             echo "Updated release date,   Was: $DATE_OLD, Now $DATE_NEW"
             echo "Date has changed.  Resetting build number to 1"
         fi
-        VERSION_NEW=1
+        #  Set it to zero here; it will be incremented by the runner
+        VERSION_NEW=0
     fi
 
     perl -i -pe "s/(^[A-Z]*_BUILDVERSION_BUILDNR)=.*/\1=$VERSION_NEW/" $VERSION_FILE
